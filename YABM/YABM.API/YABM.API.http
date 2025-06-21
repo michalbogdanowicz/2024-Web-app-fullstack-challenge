@@ -1,0 +1,6 @@
+@YABM.API_HostAddress = http://localhost:5163
+
+GET {{YABM.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
