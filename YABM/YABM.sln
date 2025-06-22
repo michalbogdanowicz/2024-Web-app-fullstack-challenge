@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36212.18 d17.14
+VisualStudioVersion = 17.14.36212.18
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YABM.API", "YABM.API\YABM.API.csproj", "{60C0E4F0-3A75-4BB4-862E-E916BB88EBEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YABM.DL", "YABM.DL\YABM.DL.csproj", "{850EA997-957C-46BA-B199-095DEB2327D6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YABM.BL", "YABM.BL\YABM.BL.csproj", "{3EB21E3F-260F-48AC-B012-50F2698257CD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{60C0E4F0-3A75-4BB4-862E-E916BB88EBEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60C0E4F0-3A75-4BB4-862E-E916BB88EBEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60C0E4F0-3A75-4BB4-862E-E916BB88EBEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{850EA997-957C-46BA-B199-095DEB2327D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{850EA997-957C-46BA-B199-095DEB2327D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{850EA997-957C-46BA-B199-095DEB2327D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{850EA997-957C-46BA-B199-095DEB2327D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EB21E3F-260F-48AC-B012-50F2698257CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EB21E3F-260F-48AC-B012-50F2698257CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EB21E3F-260F-48AC-B012-50F2698257CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EB21E3F-260F-48AC-B012-50F2698257CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
