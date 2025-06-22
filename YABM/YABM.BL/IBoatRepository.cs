@@ -15,8 +15,8 @@ namespace YABM.BL
         /// </summary>
         /// <param name="boat"></param>
         void Update(Boat boat);
-        void Delete(long boatId);
+        void Delete(int boatId);
         IEnumerable<Boat> GetAll();
-        Boat Get(long id);
+        Boat Get(int id);
     }
 }

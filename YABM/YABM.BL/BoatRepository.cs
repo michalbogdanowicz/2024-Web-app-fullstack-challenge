@@ -24,7 +24,7 @@ namespace YABM.BL
 
         }
 
-        public void Delete(long boatId)
+        public void Delete(int boatId)
         {
             throw new NotImplementedException();
         }
@@ -58,7 +58,7 @@ namespace YABM.BL
 
         }
 
-        public Boat? Get(long id)
+        public Boat? Get(int id)
         {
 
             var dbBoat = _context.Boats.FirstOrDefault(i => i.BoatId == id);

@@ -9,7 +9,7 @@ namespace YABM.DL
 {
     public class Boat
     {
-        public long BoatId { get; set; }
+        public int BoatId { get; set; }
         [MaxLength(100)]
         public string Name { get; set; }
         [MaxLength(10000)]

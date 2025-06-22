@@ -18,7 +18,7 @@ namespace YABM.API.Controllers
 
 
         [HttpGet]
-        public ActionResult<IEnumerable<Boat>> Get(long? id)
+        public ActionResult<IEnumerable<Boat>> Get(int? id)
         {
             var result = new List<Boat>();
 

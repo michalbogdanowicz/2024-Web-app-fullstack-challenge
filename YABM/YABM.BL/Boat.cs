@@ -4,7 +4,7 @@ namespace YABM.BL
 {
     public class Boat
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         private string _name;
         private string _description;
         public string Name
@@ -53,7 +53,7 @@ namespace YABM.BL
             this.Description = description;
         }
 
-        public Boat(long id, string name, string description)
+        public Boat(int id, string name, string description)
         {
             this.Id = id;
             this.Name = name;
