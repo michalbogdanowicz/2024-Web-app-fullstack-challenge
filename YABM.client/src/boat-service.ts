@@ -18,4 +18,8 @@ export class BoatService {
   deleteBoat(id: number) : Observable<boolean> {
     return this.http.delete<boolean>('https://localhost:32769/Boat?id=' + id);
  }
+
+   createBoat(newBoat : Boat) : Observable<boolean> {
+    return this.http.post<boolean>('https://localhost:32769/Boat', { name : newBoat.name, description : newBoat.description });
+ }
 }

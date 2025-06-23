@@ -1,0 +1,16 @@
+<div style="padding: 20px;" ><br />
+<!-- TODO Add an error message -->
+<mat-form-field>
+  <mat-label>Name</mat-label>
+  <input matInput [(ngModel)]="boatName">
+</mat-form-field>
+<br />
+<mat-form-field>
+  <mat-label>Description</mat-label>
+  <textarea matInput [(ngModel)]="boatDescription"></textarea>
+</mat-form-field>
+<br />
+
+<button matButton="outlined" (click)="createBoat()">Create boat</button>
+<button matButton="outlined" (click)="cancel()">Cancel</button>
+</div>

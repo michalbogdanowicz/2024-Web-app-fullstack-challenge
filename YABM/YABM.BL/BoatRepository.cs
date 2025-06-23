@@ -21,7 +21,8 @@ namespace YABM.BL
         //}
         public void Add(Boat boat)
         {
-
+            _context.Boats.Add(new DL.Boat() { Name = boat.Name, Description = boat.Description }); // Boat must be a valid BL object, checks already happen in there.
+            _context.SaveChanges();
         }
 
         public void Delete(int boatId)

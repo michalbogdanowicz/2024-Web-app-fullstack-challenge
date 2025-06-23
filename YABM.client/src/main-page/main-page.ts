@@ -6,11 +6,12 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Alert } from '../app/alert/alert';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { BoatForm } from '../app/boat-form/boat-form';
 
 
 @Component({
   selector: 'app-main-page',
-  imports: [MatToolbarModule, MatExpansionModule, MatDialogModule, MatButtonModule, MatIconModule],
+  imports: [MatToolbarModule, MatExpansionModule, MatDialogModule, MatButtonModule, MatIconModule, BoatForm],
   templateUrl: './main-page.html',
   styleUrl: './main-page.css'
 })
@@ -19,7 +20,7 @@ export class MainPage {
   items: Boat[] = [];
   private boatServiceClient = inject(BoatService);
   errorState: boolean = false;
-
+  creationNeeded = false;
   private readonly cd = inject(ChangeDetectorRef);
 
   ngAfterContentInit() {
@@ -48,6 +49,8 @@ export class MainPage {
   }
 
   deleteClick(id: number) {
+    // TODO disable button during deletion.
+
     this.boatServiceClient.deleteBoat(id).subscribe({
       next: (data) => {
         this.refreshListOfBoats();
@@ -73,6 +76,24 @@ export class MainPage {
       },
     });
   }
+
+  openCreationForm() {
+    console.log('openCreationForm caleed');
+    this.creationNeeded = true;
+    this.cd.detectChanges();
+
+  }
+
+  closeCreationForm(bool: boolean) {
+    console.log('closeCreationForm caleed');
+    this.creationNeeded = false;
+    console.log(bool);
+    if (bool) {
+      this.refreshListOfBoats();
+    } else {
+      this.cd.detectChanges();
+    }
+  }
 }
 
 
@@ -87,5 +108,7 @@ export class Boat {
     this.name = name;
     this.description = description;
   }
+
+
 
 }
