@@ -46,21 +46,21 @@ namespace YABM.API.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public ActionResult Create([FromBody]Boat boat)
+        public ActionResult Create([FromBody] Boat boat)
         {
             // let the Boat BL tell us what is right.
             // TODO a more efficient way would be to not use the exception, as that eats away resoureces. It is not really an "exceptional" behaviour. But not the end of the world in this case.
-            // TODO add a check for the existance of the paramters.
             _boatRepository.Add(new BL.Boat(boat.Name, boat.Description));
             return Created();
         }
 
 
         [HttpPut]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit([FromBody] Boat boat)
         {
             // TODO could be a patch instead of a put.
-            throw new NotImplementedException();
+            _boatRepository.Update(new BL.Boat(boat.Id, boat.Name, boat.Description));
+            return Created();
         }
 
 

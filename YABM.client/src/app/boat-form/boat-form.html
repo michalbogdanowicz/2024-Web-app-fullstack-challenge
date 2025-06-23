@@ -1,4 +1,9 @@
 <div style="padding: 20px;" ><br />
+@if (isCreationMode()) {
+<h1>Create a new Boat!</h1>
+}@else {
+<h1>Editing boat {{this.boatId}}  </h1>
+}
 <!-- TODO Add an error message -->
 <mat-form-field>
   <mat-label>Name</mat-label>
@@ -10,7 +15,11 @@
   <textarea matInput [(ngModel)]="boatDescription"></textarea>
 </mat-form-field>
 <br />
-
+@if (isCreationMode()) {
 <button matButton="outlined" (click)="createBoat()">Create boat</button>
+}
+@else {
+<button matButton="outlined" (click)="editBoat()">Save changes</button>
+}
 <button matButton="outlined" (click)="cancel()">Cancel</button>
 </div>

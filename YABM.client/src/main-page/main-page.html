@@ -8,7 +8,7 @@
 
   @if (creationNeeded) {
 
-  <app-boat-form (workDone)="closeCreationForm($event)"></app-boat-form>
+  <app-boat-form (workDone)="closeCreationForm($event)"  [mode]="this.boatFormMode.creation"></app-boat-form>
   }
 
   @if (errorState) {
@@ -21,12 +21,20 @@
     <mat-expansion-panel hideToggle>
       <mat-expansion-panel-header>
         <mat-panel-title> Boat with Id {{item.id}} </mat-panel-title>
-        <mat-panel-description> {{item.name}} </mat-panel-description>
+        <mat-panel-description> {{item.name}}  </mat-panel-description>
       </mat-expansion-panel-header>
-      <p> {{item.description }}</p>
+        @if(this.editingItemId == item.id){
+            <app-boat-form [mode]="this.boatFormMode.edit" (workDone)="closeEditingForm($event)" [inputBoat]="item"> </app-boat-form>
+        } @else { 
+          <p> {{item.description }}</p>
+        }
+      <button matFab aria-label="button to edit" (click)="editClicked(item.id)">
+        <mat-icon>edit</mat-icon>
+      </button>
       <button matFab aria-label="button to destroy" (click)="deleteClick(item.id)">
         <mat-icon>delete</mat-icon>
       </button>
+
     </mat-expansion-panel>
 
     }

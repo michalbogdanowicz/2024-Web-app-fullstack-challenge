@@ -6,7 +6,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { Alert } from '../app/alert/alert';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BoatForm } from '../app/boat-form/boat-form';
+import { BoatForm, BoatFormMode } from '../app/boat-form/boat-form';
 
 
 @Component({
@@ -21,8 +21,9 @@ export class MainPage {
   private boatServiceClient = inject(BoatService);
   errorState: boolean = false;
   creationNeeded = false;
+  editingItemId = -1; // the id of the items getting edited
   private readonly cd = inject(ChangeDetectorRef);
-
+  readonly boatFormMode = BoatFormMode;
   ngAfterContentInit() {
     this.refreshListOfBoats();
   }
@@ -64,7 +65,10 @@ export class MainPage {
     })
   }
 
+  editClicked(id: number) {
+    this.editingItemId = id;
 
+  }
 
   readonly dialog = inject(MatDialog);
 
@@ -77,15 +81,15 @@ export class MainPage {
     });
   }
 
+  
+
   openCreationForm() {
-    console.log('openCreationForm caleed');
     this.creationNeeded = true;
     this.cd.detectChanges();
 
   }
 
   closeCreationForm(bool: boolean) {
-    console.log('closeCreationForm caleed');
     this.creationNeeded = false;
     console.log(bool);
     if (bool) {
@@ -94,6 +98,18 @@ export class MainPage {
       this.cd.detectChanges();
     }
   }
+
+
+  closeEditingForm(bool: boolean) {
+    this.editingItemId = -1;
+    if (bool) {
+      this.refreshListOfBoats();
+    } else {
+      this.cd.detectChanges();
+    }
+  }
+
+
 }
 
 

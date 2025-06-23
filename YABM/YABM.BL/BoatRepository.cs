@@ -60,7 +60,17 @@ namespace YABM.BL
 
         public void Update(Boat boat)
         {
-            throw new NotImplementedException();
+            var dbBoat = _context.Boats.FirstOrDefault(i => i.BoatId == boat.Id);
+            if (dbBoat == null)
+            {
+                throw new ArgumentException($"No boat with id {boat.Id}");
+            }
+            else
+            {
+                dbBoat.Name = boat.Name;
+                dbBoat.Description = boat.Description;
+                _context.SaveChanges();
+            }
         }
         public void Dispose()
         {

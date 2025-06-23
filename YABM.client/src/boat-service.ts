@@ -22,4 +22,9 @@ export class BoatService {
    createBoat(newBoat : Boat) : Observable<boolean> {
     return this.http.post<boolean>('https://localhost:32769/Boat', { name : newBoat.name, description : newBoat.description });
  }
+
+   editBoat(oldBoat: Boat) {
+    return this.http.put<boolean>('https://localhost:32769/Boat', {id : oldBoat.id, name : oldBoat.name, description : oldBoat.description });
+  }
+
 }

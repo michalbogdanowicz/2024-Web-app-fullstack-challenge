@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { BoatService } from '../../boat-service';
 import { Boat } from '../../main-page/main-page';
-import { FormsModule } from "@angular/forms"
+import { FormsModule, UntypedFormBuilder } from "@angular/forms"
 
 @Component({
   selector: 'app-boat-form',
@@ -14,11 +14,27 @@ import { FormsModule } from "@angular/forms"
   styleUrl: './boat-form.css'
 })
 export class BoatForm {
-  // to make a value necessary from the Boat Form.
+
   public boatName: string = "";
   public boatDescription: string = "";
+  public boatId = -1;
   workDone = output<boolean>();
   private boatServiceClient = inject(BoatService);
+  mode = input.required<BoatFormMode>();
+  inputBoat = input<Boat>();
+
+  readonly BoatFormMode = BoatFormMode;
+
+  ngOnInit() {
+    if (this.mode() == BoatFormMode.edit) {
+      if (this.inputBoat() !== undefined) {
+        this.boatName = this.inputBoat()!.name;
+        this.boatDescription = this.inputBoat()!.description;
+        this.boatId = this.inputBoat()!.id;
+      }
+
+    }
+  }
 
   cancel() {
     this.workDone.emit(false);
@@ -35,9 +51,7 @@ export class BoatForm {
     let sub = this.boatServiceClient.createBoat(new Boat(0, this.boatName, this.boatDescription))
       .subscribe({
         next: (data) => {
-          console.log("object created")
           this.workDone.emit(true);
-
         },
         error: (error) => {
           console.log(error)
@@ -48,4 +62,31 @@ export class BoatForm {
         }
       })
   }
+
+  isCreationMode() {
+    return this.mode() == BoatFormMode.creation;
+  }
+
+  editBoat() {
+    // TODO disable button for editing the boat when inputs have not been changed.
+  let sub = this.boatServiceClient.editBoat(new Boat(this.boatId, this.boatName, this.boatDescription))
+      .subscribe({
+        next: (data) => {
+          this.workDone.emit(true);
+        },
+        error: (error) => {
+          console.log(error)
+          sub.unsubscribe()
+        },
+        complete: () => {
+          sub.unsubscribe()
+        }
+      })
+
+  }
+}
+
+export enum BoatFormMode {
+  creation = 0,
+  edit = 1
 }
