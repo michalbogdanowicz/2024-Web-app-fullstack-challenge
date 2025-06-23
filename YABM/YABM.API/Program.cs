@@ -68,7 +68,11 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
-
+// TODO set it up so CORS will not bother you.
+app.UseCors( x => x // **** VERY UNSAFE **** //
+.AllowAnyHeader()
+.AllowAnyMethod()
+.AllowAnyOrigin());
 app.UseAuthorization();
 
 app.MapControllers();

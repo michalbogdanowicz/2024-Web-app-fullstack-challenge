@@ -26,7 +26,15 @@ namespace YABM.BL
 
         public void Delete(int boatId)
         {
-            throw new NotImplementedException();
+            // TODO preformacne improvement : by not loading the object into memory, there is a way I forgot to mark it in the context for deletion.
+            var boat = _context.Boats.FirstOrDefault(i => i.BoatId == boatId);
+            if (boat == null)
+            {
+                throw new ArgumentException($"No boat with id {boatId}");
+            }
+
+            _context.Boats.Remove(boat);
+            _context.SaveChanges();
         }
 
 

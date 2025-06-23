@@ -1,0 +1,49 @@
+<mat-toolbar>
+  <span>Welcome to Yet Another Boat Manager</span>
+</mat-toolbar>
+
+<mat-accordion>
+  <!-- <mat-expansion-panel  hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Boat with Id 1 </mat-panel-title>
+      <mat-panel-description> This is the name of the boat. </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p> this is the description of the boat.</p>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel (opened)="panelOpenState.set(true)" (closed)="panelOpenState.set(false)">
+    <mat-expansion-panel-header>
+      <mat-panel-title> Self aware panel </mat-panel-title>
+      <mat-panel-description>
+        Currently I am {{panelOpenState() ? 'open' : 'closed'}}
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>I'm visible because I am open</p>
+  </mat-expansion-panel> -->
+
+  <!-- Possible improvements include a loading widget, better alerts, more css magic, paging-->
+
+  @if (errorState) {
+ <!-- TODO fix problem with error state.-->
+  <p>The server returned an error, try refreshing this page.</p>
+
+  } @else {
+  @for (item of items; track item.id; let idx = $index, e = $even) {
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title> Boat with Id {{item.id}} </mat-panel-title>
+      <mat-panel-description> {{item.name}} </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p> {{item.description }}</p>
+      <button matFab aria-label="Example icon button with a delete icon">
+        <mat-icon (click)="deleteClick(item.id)">delete</mat-icon>
+      </button>
+  </mat-expansion-panel>
+  }
+  @empty {
+  <p>No boats found. Try inserting one!</p>
+  }
+
+  }
+
+</mat-accordion>

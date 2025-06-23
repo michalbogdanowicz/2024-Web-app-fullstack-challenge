@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyModel.Resolution;
 using YABM.API.DTO;
@@ -68,7 +69,6 @@ namespace YABM.API.Controllers
         public ActionResult Delete(int id, IFormCollection collection)
         {
             _boatRepository.Delete(id);
-            // TODO what happens when there is no object to delete?
             return Ok();
         }
     }
