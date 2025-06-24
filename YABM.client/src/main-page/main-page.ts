@@ -7,6 +7,7 @@ import { Alert } from '../app/alert/alert';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { BoatForm, BoatFormMode } from '../app/boat-form/boat-form';
+import { OidcSecurityService } from 'angular-auth-oidc-client';
 
 
 @Component({
@@ -108,7 +109,20 @@ export class MainPage {
       this.cd.detectChanges();
     }
   }
+  
+  private readonly oidcSecurityService = inject(OidcSecurityService);
 
+  isAuthenticated() {
+    this.oidcSecurityService.checkAuth().subscribe(({ isAuthenticated, userData }) => { console.log(isAuthenticated); console.log(userData) });
+  }
+
+  login() {
+    this.oidcSecurityService.authorize();
+  }
+
+  logout() {
+    this.oidcSecurityService.logoff().subscribe((result) => console.log(result));
+  }
 
 }
 

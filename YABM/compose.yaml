@@ -1,0 +1,7 @@
+services:
+    api:
+        build:
+          context: .
+          dockerfile: ./YABM.API/Dockerfile
+        ports:
+          - "9000:8080"

@@ -6,43 +6,49 @@
     </button>
   </div>
 
+  <button matButton="outlined" (click)="login()">login</button>
+  <button matButton="outlined" (click)="isAuthenticated()">auth check</button>
+  <button matButton="outlined" (click)="logout()">logout</button>
+
+
   @if (creationNeeded) {
 
-  <app-boat-form (workDone)="closeCreationForm($event)"  [mode]="this.boatFormMode.creation"></app-boat-form>
-  }
+  <app-boat-form (workDone)=" closeCreationForm($event)" [mode]="this.boatFormMode.creation"></app-boat-form>
+    }
 
-  @if (errorState) {
-  <p>The server returned an error, try refreshing this page.</p>
+    @if (errorState) {
+    <p>The server returned an error, try refreshing this page.</p>
 
-  } @else {
-  <div style="padding: 10px;">
+    } @else {
+    <div style="padding: 10px;">
 
-    @for (item of items; track item.id; let idx = $index, e = $even) {
-    <mat-expansion-panel hideToggle>
-      <mat-expansion-panel-header>
-        <mat-panel-title> Boat with Id {{item.id}} </mat-panel-title>
-        <mat-panel-description> {{item.name}}  </mat-panel-description>
-      </mat-expansion-panel-header>
+      @for (item of items; track item.id; let idx = $index, e = $even) {
+      <mat-expansion-panel hideToggle>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Boat with Id {{item.id}} </mat-panel-title>
+          <mat-panel-description> {{item.name}} </mat-panel-description>
+        </mat-expansion-panel-header>
         @if(this.editingItemId == item.id){
-            <app-boat-form [mode]="this.boatFormMode.edit" (workDone)="closeEditingForm($event)" [inputBoat]="item"> </app-boat-form>
-        } @else { 
-          <p> {{item.description }}</p>
+        <app-boat-form [mode]="this.boatFormMode.edit" (workDone)="closeEditingForm($event)" [inputBoat]="item">
+        </app-boat-form>
+        } @else {
+        <p> {{item.description }}</p>
         }
-      <button matFab aria-label="button to edit" (click)="editClicked(item.id)">
-        <mat-icon>edit</mat-icon>
-      </button>
-      <button matFab aria-label="button to destroy" (click)="deleteClick(item.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
+        <button matFab aria-label="button to edit" (click)="editClicked(item.id)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button matFab aria-label="button to destroy" (click)="deleteClick(item.id)">
+          <mat-icon>delete</mat-icon>
+        </button>
 
-    </mat-expansion-panel>
+      </mat-expansion-panel>
+
+      }
+      @empty {
+      <p>No boats found. Try inserting one!</p>
+      }
+    </div>
 
     }
-    @empty {
-    <p>No boats found. Try inserting one!</p>
-    }
-  </div>
-
-  }
 
 </mat-accordion>

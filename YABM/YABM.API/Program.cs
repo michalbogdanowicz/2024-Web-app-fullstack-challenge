@@ -50,26 +50,26 @@ var app = builder.Build();
 app.Services.UseSimpleInjector(container);
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
+//if (app.Environment.IsDevelopment())
+//{
+app.UseSwagger();
+app.UseSwaggerUI();
 
-    // if environemnet is developement generate database & data to use.
-    using (var context = new YABM.DL.YABMContext())
-    {
-        context.Database.EnsureDeleted();
-        context.Database.EnsureCreated(); // migration is now unsupported.
-        context.AddSomeBoats();
-    }
+// TODO remove this and autogenerate the database when necesary in a different way.
+using (var context = new YABM.DL.YABMContext())
+{
+    context.Database.EnsureDeleted();
+    context.Database.EnsureCreated(); // migration is now unsupported.
+    context.AddSomeBoats();
 }
+//}
 
 
 
 
 app.UseHttpsRedirection();
 // TODO set it up so CORS will not bother you.
-app.UseCors( x => x // **** VERY UNSAFE **** //
+app.UseCors(x => x // **** VERY UNSAFE **** //
 .AllowAnyHeader()
 .AllowAnyMethod()
 .AllowAnyOrigin());
