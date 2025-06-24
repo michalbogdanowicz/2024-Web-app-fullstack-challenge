@@ -8,23 +8,25 @@ import { Boat } from './main-page/main-page';
 })
 export class BoatService {
 
+  port = 32779
+  address = `https://localhost:${this.port}/Boat`;
+  constructor(private http: HttpClient) {
+  }
 
- constructor(private http: HttpClient) {}
+  getBoats(): Observable<Boat[]> {
+    return this.http.get<Boat[]>(this.address);
+  }
 
- getBoats(): Observable<Boat[]>{
-    return this.http.get<Boat[]>('https://localhost:32769/Boat');
- }
+  deleteBoat(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(this.address + '?id=' + id);
+  }
 
-  deleteBoat(id: number) : Observable<boolean> {
-    return this.http.delete<boolean>('https://localhost:32769/Boat?id=' + id);
- }
+  createBoat(newBoat: Boat): Observable<boolean> {
+    return this.http.post<boolean>(this.address, { name: newBoat.name, description: newBoat.description });
+  }
 
-   createBoat(newBoat : Boat) : Observable<boolean> {
-    return this.http.post<boolean>('https://localhost:32769/Boat', { name : newBoat.name, description : newBoat.description });
- }
-
-   editBoat(oldBoat: Boat) {
-    return this.http.put<boolean>('https://localhost:32769/Boat', {id : oldBoat.id, name : oldBoat.name, description : oldBoat.description });
+  editBoat(oldBoat: Boat) {
+    return this.http.put<boolean>(this.address, { id: oldBoat.id, name: oldBoat.name, description: oldBoat.description });
   }
 
 }
